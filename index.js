@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const fs = require('fs');;
 const { WebClient } = require('@slack/web-api');
@@ -12,7 +11,6 @@ const app = express()
 const port = 3000;
 let gChannelId = null;
 
-
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/static', express.static(path.join(__dirname, 'public')));
@@ -25,15 +23,35 @@ app.get('/', (req, res) => {
 });
 
 app.post('/postChat', (req, res) => {
-    if (!gChannelId)
-    console.log(req.body);
-     const result = web.chat.postMessage({
-        text: req.body.message,
-    channel: gChannelId,
-      });
-     res.end('OK');
+  if (!gChannelId) {
+    console.error('Channel is not loaded yet!');
+    return;
+  }
 
-})
+  let imageUrl;
+  const message = req.body.message;
+  if (message === 'ALPHA') {
+    imageUrl = `https://i.imgur.com/pSvXYJf.png`
+  } else if (message === 'BETA') {
+    imageUrl = `https://source.unsplash.com/300x300/?bike`
+  }
+
+  const result = web.chat.postMessage({
+  blocks: [{
+    "type": "image",
+    "title": {
+      "type": "plain_text",
+      "text": message,
+      "emoji": true
+    },
+    "image_url": imageUrl,
+    "alt_text": message
+  }],
+
+     channel: gChannelId,
+  });
+  res.end('OK');
+});
 
 async function loadChannelId()  {
     const channels = await web.conversations.list();

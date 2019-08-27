@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>iPhone Ensemble</title>
 </head>
 <body>
-  <img src="http://source.unsplash.com/50x50" onClick="postChat('ALPHA')">
-    <img src="http://source.unsplash.com/60x50" onClick="postChat('BETA')">
+  <h1>iPhone ensemble</h1>
+  <img src="https://i.imgur.com/pSvXYJf.png" width="100" onClick="postChat('ALPHA')">
+  <img src="http://source.unsplash.com/60x50" onClick="postChat('BETA')">
 
 <script>
-    function postChat(message) {
-    fetch('/postChat', { method: 'POST',   headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },body: JSON.stringify({message})    })
+function postChat(message) {
+  fetch('/postChat', {
+    method: 'POST',
+    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    body: JSON.stringify({message})
+  });
 }
 </script>
 </body>
