@@ -17,3 +17,6 @@ Run the server using nodemon:
 
     nodemon
 
+Open the page in your browser:
+
+    http://localhost:3000/
