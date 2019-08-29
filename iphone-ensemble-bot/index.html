@@ -4,11 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>iPhone Ensemble</title>
+  <style>
+    * { box-sizing: border-box; }
+    body, html { font-size: 100%; font-family: sans-serif; }
+    h1 { text-align: center; }
+    .overview { display: grid; grid-template-columns: repeat(auto-fit, 450px); grid-gap: 10px; }
+    .player { border: 2px solid #ccc; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px 0; }
+    .soundboard { display: grid; grid-template-columns: repeat(4, 100px); grid-gap: 5px; }
+    .cell { display: flex; justify-content: center; align-items: center; width: 100px; height: 100px; background: #ddd; font-size: 0.8rem; cursor: pointer; }
+    .cell:hover { background: #ccc; }
+    .cell:active { color: #eee; background: #666; }
+
+  </style>
 </head>
 <body>
   <h1>iPhone ensemble</h1>
-  <img src="https://i.imgur.com/pSvXYJf.png" width="100" onClick="postChat('ALPHA')">
-  <img src="http://source.unsplash.com/60x50" onClick="postChat('BETA')">
+  <div class="overview">
+    <div class="player">
+      <h2>Player 1</h2>
+      <div class="soundboard">
+        <div class="cell" onClick="postChat('P1:Noise')">Noise</div>
+        <div class="cell" onClick="postChat('P1:Snakes')">Snakes</div>
+        <div class="cell" onClick="postChat('P1:Beeps & Blops')">Beeps & Blops</div>
+        <div class="cell" onClick="postChat('P1:Beeps & Blops')">Eruptions</div>
+        <div class="cell" onClick="postChat('P1:Micro(tonality)')">Micro(tonality)</div>
+        <div class="cell" onClick="postChat('P1:Mixture')">Mixture</div>
+        <div class="cell" onClick="postChat('P1:!Silence!')">!Silence!</div>
+        <div class="cell" onClick="postChat('P1:Harmonix')">Harmonix</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <h2>Player 2</h2>
+      <div class="soundboard">
+        <div class="cell" onClick="postChat('P2:Noise')">Noise</div>
+        <div class="cell" onClick="postChat('P2:Snakes')">Snakes</div>
+        <div class="cell" onClick="postChat('P2:Beeps & Blops')">Beeps & Blops</div>
+        <div class="cell" onClick="postChat('P2:Beeps & Blops')">Eruptions</div>
+        <div class="cell" onClick="postChat('P2:Micro(tonality)')">Micro(tonality)</div>
+        <div class="cell" onClick="postChat('P2:Mixture')">Mixture</div>
+        <div class="cell" onClick="postChat('P2:!Silence!')">!Silence!</div>
+        <div class="cell" onClick="postChat('P2:Harmonix')">Harmonix</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <h2>Player 3</h2>
+      <div class="soundboard">
+        <div class="cell" onClick="postChat('P3:Noise')">Noise</div>
+        <div class="cell" onClick="postChat('P3:Snakes')">Snakes</div>
+        <div class="cell" onClick="postChat('P3:Beeps & Blops')">Beeps & Blops</div>
+        <div class="cell" onClick="postChat('P3:Beeps & Blops')">Eruptions</div>
+        <div class="cell" onClick="postChat('P3:Micro(tonality)')">Micro(tonality)</div>
+        <div class="cell" onClick="postChat('P3:Mixture')">Mixture</div>
+        <div class="cell" onClick="postChat('P3:!Silence!')">!Silence!</div>
+        <div class="cell" onClick="postChat('P3:Harmonix')">Harmonix</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <h2>Player 4</h2>
+      <div class="soundboard">
+        <div class="cell" onClick="postChat('P4:Noise')">Noise</div>
+        <div class="cell" onClick="postChat('P4:Snakes')">Snakes</div>
+        <div class="cell" onClick="postChat('P4:Beeps & Blops')">Beeps & Blops</div>
+        <div class="cell" onClick="postChat('P4:Beeps & Blops')">Eruptions</div>
+        <div class="cell" onClick="postChat('P4:Micro(tonality)')">Micro(tonality)</div>
+        <div class="cell" onClick="postChat('P4:Mixture')">Mixture</div>
+        <div class="cell" onClick="postChat('P4:!Silence!')">!Silence!</div>
+        <div class="cell" onClick="postChat('P4:Harmonix')">Harmonix</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <h2>Player 5</h2>
+      <div class="soundboard">
+        <div class="cell" onClick="postChat('P5:Noise')">Noise</div>
+        <div class="cell" onClick="postChat('P5:Snakes')">Snakes</div>
+        <div class="cell" onClick="postChat('P5:Beeps & Blops')">Beeps & Blops</div>
+        <div class="cell" onClick="postChat('P5:Beeps & Blops')">Eruptions</div>
+        <div class="cell" onClick="postChat('P5:Micro(tonality)')">Micro(tonality)</div>
+        <div class="cell" onClick="postChat('P5:Mixture')">Mixture</div>
+        <div class="cell" onClick="postChat('P5:!Silence!')">!Silence!</div>
+        <div class="cell" onClick="postChat('P5:Harmonix')">Harmonix</div>
+      </div>
+    </div>
+
+  </div>
+
 
 <script>
 function postChat(message) {
