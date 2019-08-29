@@ -2,6 +2,17 @@ require('dotenv').config();
 const fs = require('fs');;
 const { WebClient } = require('@slack/web-api');
 const token = process.env.SLACK_TOKEN;
+
+if (!token) {
+  console.error();
+  console.error(`I can't find a SLACK_TOKEN. Make sure you have a file called ".env" that contains the SLACK_TOKEN.`);
+  console.error(`See .env_sample for an example.`);
+  console.error(`You can get a token from https://api.slack.com/custom-integrations/legacy-tokens`);
+  console.error();
+  process.exit(1);
+}
+
+
 const web = new WebClient(token);
 const express = require('express')
 const path = require('path');
@@ -19,7 +30,7 @@ app.get('/', (req, res) => {
      res.writeHead(200, {
         "Content-Type": "text/html"
     });
-    res.end(fs.readFileSync('index.html', 'utf-8'))
+    res.end(fs.readFileSync('index.html', 'utf-8'));
 });
 
 app.post('/postChat', (req, res) => {
@@ -28,27 +39,12 @@ app.post('/postChat', (req, res) => {
     return;
   }
 
-  let imageUrl;
   const message = req.body.message;
-  if (message === 'ALPHA') {
-    imageUrl = `https://i.imgur.com/pSvXYJf.png`
-  } else if (message === 'BETA') {
-    imageUrl = `https://source.unsplash.com/300x300/?bike`
-  }
+  // FIXME: Do something with the player? Send everybody their own notification?
 
   const result = web.chat.postMessage({
-  blocks: [{
-    "type": "image",
-    "title": {
-      "type": "plain_text",
-      "text": message,
-      "emoji": true
-    },
-    "image_url": imageUrl,
-    "alt_text": message
-  }],
-
-     channel: gChannelId,
+    text: message,
+    channel: gChannelId,
   });
   res.end('OK');
 });
@@ -57,12 +53,11 @@ async function loadChannelId()  {
     const channels = await web.conversations.list();
     const channel = channels.channels.find(c => c.name === 'iphone_ensemble_performancechannel');
     gChannelId = channel.id;
-    console.log('LOADED IPHONE ENSEMBLE PERFORMANCE CHANNEL ID', gChannelId);
-
-    //  console.log(`Successfully send message ${result.ts} in conversation ${channelId}`);
-
-
-    // console.log(channels.channels.map(c => c.name));
+    console.log('iPhone Ensemble Performance Channel ID:', gChannelId);
 }
+
 loadChannelId();
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => {
+  console.log(`Open the webpage at http://localhost:${port}.`);
+  console.log(`(You can hold the Command key to click this link in the Terminal.)`);
+})
