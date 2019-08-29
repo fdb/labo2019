@@ -7,11 +7,21 @@ const wsApp = expressWs(express());
 const app = wsApp.app;
 const port = process.env.PORT | 3000;
 
+const gClients = [];
 
-app.use('/static', express.static(path.join(__dirname, 'static')));
+app.use('/', express.static(path.join(__dirname, 'static')));
 
-app.get('/', (req, res) => {
-    res.end(fs.readFileSync('static/index.html', 'utf-8'));
+app.ws('/play', function(client, req) {
+  gClients.push(client);
+  client.on('message', function(msg) {
+    for (const client of gClients) {
+      client.send(msg);
+    }
+  });
+  client.on('close', function() {
+    const clientIndex = gClients.indexOf(client);
+    gClients.splice(clientIndex, 1);
+  })
 });
 
 app.post('/postChat', (req, res) => {
